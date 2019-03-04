@@ -1,0 +1,17 @@
+{
+  "name": "EntropiawikiAPI",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:slazor/entropiawiki-api.git",
+  "author": "slazor <braskamin13@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mariadb": "^2.0.3",
+    "mysql2": "^1.6.5",
+    "sequelize": "^4.43.0",
+    "uuid": "^3.3.2"
+  }
+}
