@@ -6,12 +6,17 @@
   "author": "slazor <braskamin13@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "setup": "node scripts/setup-db.js",
+    "seed": "node scripts/seed.js"
   },
   "dependencies": {
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
     "mariadb": "^2.0.3",
     "mysql2": "^1.6.5",
-    "sequelize": "^4.43.0",
-    "uuid": "^3.3.2"
-  }
+    "restify": "^8.1.0",
+    "sequelize": "^4.43.0"
+  },
+  "devDependencies": {}
 }

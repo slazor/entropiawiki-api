@@ -1,10 +1,17 @@
-const { database } = require('./config.js');
-const { Mob } = require('./models');
+const restify = require('restify');
+const graphqlHTTP = require('express-graphql');
+const schema = require('./schema');
 
-database.sync()
-.then(() => Mob.create({
-  name: 'Atrox'
-}))
-.then(atrox => {
-  console.log(atrox.toJSON());
-});
+const app = restify.createServer();
+
+app.post('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: false
+}));
+
+app.get('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: true
+}));
+
+app.listen(4000);
