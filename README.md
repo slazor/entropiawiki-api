@@ -31,6 +31,9 @@ Goals:
 
 #### Example query
 
+All ids returned to children of mob are the relation id used to update the values.  
+
+Get mob
 ```
 query Query($mobName: String) {
   mob(name: $mobName) {
@@ -50,6 +53,46 @@ query Query($mobName: String) {
 }
 
 {
-  "mobName": "Atrox"
+  "mobName": "<string>"
+}
+```
+
+Update mob
+```
+mutation Mutation($mobId: String!, $mobName: String) {
+  updateMob(id: $mobId, name: $mobName) {
+    id
+    name
+    type
+    maturities {
+      id
+      name
+      hp
+      attributes {
+        id
+        name
+        value
+      }
+    }
+  }
+}
+
+{
+  "mobId": "<uuid>",
+  "mobName": "<string>"
+}
+```
+
+Update mob maturity attribute
+```
+mutation Mutation($mobMaturityAttributeId: String!, $value: Int!) {
+  updateMobMaturityAttribute(id: $mobMaturityAttributeId, value:$value) {
+    id
+  }
+}
+
+{
+  "mobMaturityAttributeId": "<uuid>",
+  "value": <int>
 }
 ```

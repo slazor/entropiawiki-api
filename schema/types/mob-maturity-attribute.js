@@ -4,6 +4,11 @@ const MobMaturityAttributeResponse = new GraphQLObjectType({
   name: "MobMaturityAttribute",
   description: "A Mob Maturity Attribute",
   fields: () => ({
+    id: {
+      type: GraphQLString,
+      description: "Mob Maturity Attribute id",
+      resolve: mobMaturityAttribute => mobMaturityAttribute.mob_maturity_attribute.id
+    },
     name: {
       type: GraphQLString,
       description: "Mob Maturity Attribute name",
@@ -12,7 +17,7 @@ const MobMaturityAttributeResponse = new GraphQLObjectType({
     value: {
       type: GraphQLString,
       description: "Mob Maturity Attribute value",
-      resolve: mobMaturityAttribute => mobMaturityAttribute.value
+      resolve: mobMaturityAttribute => mobMaturityAttribute.mob_maturity_attribute.value
     }
   })
 });

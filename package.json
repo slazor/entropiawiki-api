@@ -16,7 +16,8 @@
     "mariadb": "^2.0.3",
     "mysql2": "^1.6.5",
     "restify": "^8.1.0",
-    "sequelize": "^4.43.0"
+    "sequelize": "^4.43.0",
+    "sequelize-paper-trail": "^2.5.2"
   },
   "devDependencies": {}
 }

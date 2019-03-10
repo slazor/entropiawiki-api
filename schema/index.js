@@ -1,18 +1,28 @@
-const { GraphQLSchema, GraphQLObjectType } = require("graphql");
-const mobResolver = require("./resolvers/mob");
-const planetResolver = require("./resolvers/planet");
+const { GraphQLObjectType, GraphQLSchema } = require("graphql");
+const queries = require("./queries");
+const mutations = require("./mutations");
 
 const query = new GraphQLObjectType({
   name: "Query",
   fields: {
-    mob: mobResolver,
-    planet: planetResolver,
+    mob: queries.mob,
+    planet: queries.planet,
+  }
+});
+
+const mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    createMob: mutations.mobCreate,
+    updateMob: mutations.mobUpdate,
+    updateMobMaturityAttribute: mutations.mobMaturityAttributeUpdate
   }
 });
 
 // Define schema
 const schema = new GraphQLSchema({
-  query: query
+  query,
+  mutation
 });
 
 module.exports = schema;

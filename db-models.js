@@ -1,5 +1,9 @@
 const { Sequelize } = require('sequelize');
 const { database } = require('./config');
+const PaperTrail = require('sequelize-paper-trail').init(database, {
+  UUID: true
+});
+PaperTrail.defineModels();
 
 const Planet = database.define('planet', {
   id: {
@@ -10,6 +14,7 @@ const Planet = database.define('planet', {
   },
   name: Sequelize.STRING
 });
+Planet.hasPaperTrail();
 
 const Attribute = database.define('attribute', {
   id: {
@@ -20,6 +25,7 @@ const Attribute = database.define('attribute', {
   },
   name: Sequelize.STRING
 });
+Attribute.hasPaperTrail();
 
 const DamageType = database.define('damage_type', {
   id: {
@@ -30,6 +36,8 @@ const DamageType = database.define('damage_type', {
   },
   name: Sequelize.STRING
 });
+DamageType.hasPaperTrail();
+
 
 const Maturity = database.define('maturity', {
   id: {
@@ -40,6 +48,7 @@ const Maturity = database.define('maturity', {
   },
   name: Sequelize.STRING
 });
+Maturity.hasPaperTrail();
 
 const MobType = database.define('mob_type', {
   id: {
@@ -50,6 +59,7 @@ const MobType = database.define('mob_type', {
   },
   name: Sequelize.STRING
 });
+MobType.hasPaperTrail();
 
 const Mob = database.define('mob', {
   id: {
@@ -60,15 +70,23 @@ const Mob = database.define('mob', {
   },
   name: Sequelize.STRING
 });
+Mob.hasPaperTrail();
 
 
 
-// Relations
+// Relation tables
 const MobMaturityAttribute = database.define('mob_maturity_attribute', {
+  id: {
+    type: Sequelize.UUID,
+    primaryKey: true,
+    unique: true,
+    defaultValue: Sequelize.UUIDV4
+  },
   value: Sequelize.FLOAT
 }, {
   timestamps: false
 });
+MobMaturityAttribute.hasPaperTrail();
 
 const MobMaturity = database.define('mob_maturity', {
   id: {
@@ -79,20 +97,18 @@ const MobMaturity = database.define('mob_maturity', {
   },
 },{
   timestamps: false
-});
+}); 
+MobMaturity.hasPaperTrail();
 
 
 
-
-
-
-Maturity.belongsToMany(Mob, {through: 'mob_maturity'});
-Mob.belongsToMany(Maturity, {through: 'mob_maturity'});
+// Mob has one type
 Mob.belongsTo(MobType);
-//MobMaturity.belongsToMany(Attribute, {through: 'mob_maturity_attribute'})
-Attribute.belongsToMany(MobMaturity, {through: 'mob_maturity_attribute'})
+// Mob has many maturities
+Mob.belongsToMany(Maturity, { through: 'mob_maturity' });
 
-
+// MobMaturity has many attributes
+MobMaturity.belongsToMany(Attribute, { as: 'Attributes', through: 'mob_maturity_attribute' })
 
 
 module.exports = {
