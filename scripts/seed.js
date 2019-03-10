@@ -60,8 +60,22 @@ async function init() {
     }))
     .then(() => models.MobType.create({
       name: "Robot"
+    }))
+
+    // Movement Types
+    .then(() => models.MovementType.create({
+      name: "Running"
+    }))
+    .then(() => models.MovementType.create({
+      name: "Flying"
     }));
 
+
+  const movementType = await models.MovementType.findOne({
+    where: {
+      name: "Running"
+    }
+  }).then(result => result.toJSON());
 
 
   const mobType1 = await models.MobType.findOne({
@@ -80,17 +94,20 @@ async function init() {
 
   const mob = await models.Mob.create({
     name: "Atrox",
-    mobTypeId: mobType1.id
+    mobTypeId: mobType1.id,
+    movementTypeId: movementType.id
   }).then(result => result.toJSON());
 
   await models.Mob.create({
     name: "Feffoid",
-    mobTypeId: mobType2.id
+    mobTypeId: mobType2.id,
+    movementTypeId: movementType.id
   }).then(result => result.toJSON());
 
   await models.Mob.create({
     name: "Kerberos",
-    mobTypeId: mobType1.id
+    mobTypeId: mobType1.id,
+    movementTypeId: movementType.id
   }).then(result => result.toJSON());
 
 
@@ -118,6 +135,26 @@ async function init() {
   const attribute2 = await models.Attribute.findOne({
     where: {
       name: "Agility"
+    } 
+  }).then(result => result.toJSON());
+
+
+
+  const damageType1 = await models.DamageType.findOne({
+    where: {
+      name: "Cut"
+    } 
+  }).then(result => result.toJSON());
+
+  const damageType2 = await models.DamageType.findOne({
+    where: {
+      name: "Stab"
+    } 
+  }).then(result => result.toJSON());
+
+  const damageType3 = await models.DamageType.findOne({
+    where: {
+      name: "Impact"
     } 
   }).then(result => result.toJSON());
 
@@ -156,9 +193,41 @@ async function init() {
       mobMaturityId: mobMaturity2.id,
       attributeId: attribute2.id,
     }
-  ])
-  .then(() => models.MobMaturityAttribute.findAll())
-  .then(result => result.map(row => row.toJSON()));
+  ]);
+
+
+  const mobMaturityDamageTypes = await models.MobMaturityDamageType.bulkCreate([
+    {
+      value: 33.3,
+      mobMaturityId: mobMaturity1.id,
+      damageTypeId: damageType1.id,
+    },
+    {
+      value: 33.3,
+      mobMaturityId: mobMaturity1.id,
+      damageTypeId: damageType2.id,
+    },
+    {
+      value: 33.3,
+      mobMaturityId: mobMaturity1.id,
+      damageTypeId: damageType3.id,
+    },
+    {
+      value: 33.3,
+      mobMaturityId: mobMaturity2.id,
+      damageTypeId: damageType1.id,
+    },
+    {
+      value: 33.3,
+      mobMaturityId: mobMaturity2.id,
+      damageTypeId: damageType2.id,
+    },
+    {
+      value: 33.3,
+      mobMaturityId: mobMaturity2.id,
+      damageTypeId: damageType3.id,
+    },
+  ]);
 
 }
 

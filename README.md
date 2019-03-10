@@ -33,10 +33,14 @@ Goals:
 
 All ids returned to children of mob are the relation id used to update the values.  
 
-Get mob
+Get full mob info
 ```
-query Query($mobName: String) {
-  mob(name: $mobName) {
+query Query($mobName: String, $planetName: String) {
+  getPlanet(name: $planetName) {
+    id
+    name
+  }
+  getMob(name: $mobName) {
     id
     name
     type
@@ -45,6 +49,12 @@ query Query($mobName: String) {
       name
       hp
       attributes {
+        id
+        name
+        value
+      }
+      damageTypes {
+        id
         name
         value
       }
@@ -53,7 +63,8 @@ query Query($mobName: String) {
 }
 
 {
-  "mobName": "<string>"
+  "mobName": "Atrox",
+  "planetName": "Calypso"
 }
 ```
 

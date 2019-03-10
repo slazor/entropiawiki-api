@@ -1,4 +1,5 @@
 const { GraphQLString } = require('graphql');
+const { Planet } = require('../../db-models');
 const PlanetResponse = require('../types/planet');
 
 const planet = {
@@ -7,9 +8,14 @@ const planet = {
     id: { type: GraphQLString },
     name: { type: GraphQLString },
   },
-  resolve: (context, args) => {
+  resolve: async (context, args) => {
     console.log("Planet args", args);
-    return {id: "12345", name: "Calypso"};
+    
+    const planet = await Planet.findOne({
+      where: args
+    }).then(result => result.toJSON());
+
+    return planet;
   }
 };
 

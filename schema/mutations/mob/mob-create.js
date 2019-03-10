@@ -10,6 +10,9 @@ const mobCreate = {
   },
   resolve: async (context, args) => {
     console.log(args);
+
+    // Add mob
+    // Add maturities + attributes
     
     return mob;
   }

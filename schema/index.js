@@ -5,8 +5,8 @@ const mutations = require("./mutations");
 const query = new GraphQLObjectType({
   name: "Query",
   fields: {
-    mob: queries.mob,
-    planet: queries.planet,
+    getMob: queries.mob,
+    getPlanet: queries.planet,
   }
 });
 

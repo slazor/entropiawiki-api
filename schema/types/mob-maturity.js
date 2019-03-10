@@ -1,5 +1,6 @@
 const { GraphQLObjectType, GraphQLString, GraphQLList } = require('graphql');
 const MobMaturityAttribute = require('./mob-maturity-attribute');
+const MobMaturityDamageType = require('./mob-maturity-damage-type');
 
 const MobMaturityResponse = new GraphQLObjectType({
   name: "MobMaturity",
@@ -24,6 +25,11 @@ const MobMaturityResponse = new GraphQLObjectType({
       type: GraphQLList(MobMaturityAttribute),
       description: "Mob Maturity attributes",
       resolve: mobMaturity => mobMaturity.attributes || []
+    },
+    damageTypes: {
+      type: GraphQLList(MobMaturityDamageType),
+      description: "Mob Maturity damage types",
+      resolve: mobMaturity => mobMaturity.damageTypes || []
     }
   })
 });

@@ -22,13 +22,15 @@ const mob = {
     const maturities = await Promise.all(mob.maturities.map( async (maturity) => {
 
       const attributes = await maturity.mob_maturity.getAttributes().then(res => res.map(r => r.toJSON()));
+      const damageTypes = await maturity.mob_maturity.getDamageTypes().then(res => res.map(r => r.toJSON()));
       const stamina = attributes.find(attribute => attribute.name.toLowerCase() === "stamina");
 
       return {
         id: maturity.mob_maturity.id,
         name: maturity.name,
         hp: stamina.mob_maturity_attribute.value * 10,
-        attributes: attributes
+        attributes,
+        damageTypes
       };
     }));
 
