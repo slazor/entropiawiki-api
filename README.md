@@ -43,6 +43,8 @@ query Query($mobName: String, $planetName: String) {
   getMob(name: $mobName) {
     id
     name
+    description
+    movementType
     type
     maturities {
       id

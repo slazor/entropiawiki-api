@@ -1,8 +1,8 @@
 const { GraphQLString, GraphQLInt, GraphQLNonNull } = require('graphql');
-const { MobMaturity, MobMaturityAttribute } = require('../../../db-models');
-const MobResponse = require('../../types/mob');
+const { MobMaturity, MobMaturityAttribute } = require('_config/db-models');
+const MobResponse = require('_types/mob');
 
-const mobMaturityAttributeUpdate = {
+const MobMaturityAttributeUpdate = {
   type: MobResponse,
   args: {
     id: { type: new GraphQLNonNull(GraphQLString) },
@@ -21,4 +21,4 @@ const mobMaturityAttributeUpdate = {
   }
 };
 
-module.exports = mobMaturityAttributeUpdate;
+module.exports = MobMaturityAttributeUpdate;

@@ -34,6 +34,11 @@ const Attribute = database.define('attribute', {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: ''
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    defaultValue: ''
   }
 });
 Attribute.hasPaperTrail();
@@ -113,6 +118,11 @@ const Mob = database.define('mob', {
     allowNull: false,
     defaultValue: ''
   },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    defaultValue: ''
+  },
   tameable: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
@@ -137,9 +147,10 @@ const MobMaturity = database.define('mob_maturity', {
   },
   level: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    allowNull: true,
+    defaultValue: null
   },
-  damage: {
+  maxDamage: {
     type: Sequelize.FLOAT,
     allowNull: true,
     defaultValue: null

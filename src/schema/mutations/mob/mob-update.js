@@ -1,8 +1,8 @@
 const { GraphQLString, GraphQLNonNull } = require('graphql');
-const { Mob } = require('../../../db-models');
-const MobResponse = require('../../types/mob');
+const { Mob } = require('_config/db-models');
+const MobResponse = require('_types/mob');
 
-const mobUpdate = {
+const MobUpdate = {
   type: MobResponse,
   args: {
     id: { type: new GraphQLNonNull(GraphQLString) },
@@ -22,4 +22,4 @@ const mobUpdate = {
   }
 };
 
-module.exports = mobUpdate;
+module.exports = MobUpdate;

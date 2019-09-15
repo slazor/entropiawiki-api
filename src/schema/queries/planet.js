@@ -1,6 +1,6 @@
 const { GraphQLString } = require('graphql');
-const { Planet } = require('../../db-models');
-const PlanetResponse = require('../types/planet');
+const { Planet } = require('_config/db-models');
+const PlanetResponse = require('_types/planet');
 
 const planet = {
   type: PlanetResponse,

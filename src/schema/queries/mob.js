@@ -1,8 +1,18 @@
 const { GraphQLString } = require('graphql');
-const MobResponse = require('../types/mob');
+const MobResponse = require('_types/mob');
 
-const { database } = require('../../config.js');
-const { Planet, Attribute, Maturity, DamageType, Mob, MobType, MobMaturity, MobMaturityAttribute } = require('../../db-models');
+const { database } = require('_config/config');
+const {
+  Planet,
+  Attribute,
+  Maturity,
+  DamageType,
+  Mob,
+  MobType,
+  MobMaturity,
+  MobMaturityAttribute,
+  MovementType
+} = require('_config/db-models');
 
 const mob = {
   type: MobResponse,
@@ -15,9 +25,12 @@ const mob = {
       where: args,
       include: [
         { model: Maturity },
-        { model: MobType }
+        { model: MobType },
+        { model: MovementType },
       ]
     });
+
+    const movementType = mob.movement_type.toJSON();
 
     const maturities = await Promise.all(mob.maturities.map( async (maturity) => {
 
@@ -38,6 +51,7 @@ const mob = {
     
     data.maturities = maturities;
     data.type = data.mob_type.name;
+    data.movementType = movementType.name;
     
     return data;
   }

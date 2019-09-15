@@ -15,10 +15,20 @@ const MobResponse = new GraphQLObjectType({
       description: "Mob name",
       resolve: mob => mob.name
     },
+    description: {
+      type: GraphQLString,
+      description: "Mob description",
+      resolve: mob => mob.description
+    },
     type: {
       type: GraphQLString,
       description: "Mob type",
       resolve: mob => mob.type
+    },
+    movementType: {
+      type: GraphQLString,
+      description: "Mob movement type",
+      resolve: mob => mob.movementType
     },
     maturities: {
       type: GraphQLList(MobMaturity),

@@ -1,5 +1,5 @@
-const { database } = require('../config.js');
-const models = require('../db-models');
+const { database } = require('../config/config');
+const models = require('../config/db-models');
 
 async function init() {
   await database.sync({ force: true })
@@ -14,19 +14,24 @@ async function init() {
 
     // Attributes
     .then(() => models.Attribute.create({
-      name: "Stamina"
+      name: "Stamina",
+      description: "Stamina is a basic attribute available to all Avatars. It influences almost every action where bodily hardiness, constitution, and physical toughness are involved."
     }))
     .then(() => models.Attribute.create({
-      name: "Strength"
+      name: "Strength",
+      description: "Strength is a basic attribute available to all Avatars. It influences almost every action where raw muscle power, lifting capacity, and brute force are involved."
     }))
     .then(() => models.Attribute.create({
-      name: "Psyche"
+      name: "Psyche",
+      description: "Psyche is a basic attribute available to all Avatars. It influences almost every action dealing with willpower, mental strength, and mindforce."
     }))
     .then(() => models.Attribute.create({
-      name: "Intelligence"
+      name: "Intelligence",
+      description: "Intelligence is a basic attribute available to all Avatars. It influences almost every action where the mind, memory or reasoning are involved."
     }))
     .then(() => models.Attribute.create({
-      name: "Agility"
+      name: "Agility",
+      description: "Agility is a basic attribute available to all avatars. It influences almost every action where coordination, finesse and grace are involved."
     }))
 
     // Maturities
@@ -94,18 +99,21 @@ async function init() {
 
   const mob = await models.Mob.create({
     name: "Atrox",
+    description: "The real name of this massive carnivore is Atroxenosaur. It has a short and stocky appearance due to its dumpy tail. The Atrox may look slow and clumsy but it's a formidable predator with four characteristic arms to grab on to its prey.",
     mobTypeId: mobType1.id,
     movementTypeId: movementType.id
   }).then(result => result.toJSON());
 
   await models.Mob.create({
     name: "Feffoid",
+    description: "This is a mega-mutant of the humanoid mutant subspecies called Feffoids.",
     mobTypeId: mobType2.id,
     movementTypeId: movementType.id
   }).then(result => result.toJSON());
 
   await models.Mob.create({
     name: "Kerberos",
+    description: "The Kerberos is a peculiar species, as it mimics the appearance of the far more dangerous creature, the Osseocollum, to scare and confuse predators into believing it is more dangerous than it really is. This is uncommon, but not unheard of in evolution and is called Batesian mimicry by biologists. It is an adaptation for survival evolved many times over on Earth, but never in creatures as big as Kerberos and Osseocollum. For this reason, Kerberos is a unique creature",
     mobTypeId: mobType1.id,
     movementTypeId: movementType.id
   }).then(result => result.toJSON());

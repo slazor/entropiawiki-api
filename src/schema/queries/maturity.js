@@ -1,5 +1,5 @@
 const { GraphQLString } = require('graphql');
-const MaturityResponse = require('../types/maturity');
+const MaturityResponse = require('._types/maturity');
 
 const mob = {
   type: MaturityResponse,

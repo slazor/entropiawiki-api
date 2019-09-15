@@ -13,9 +13,10 @@ const query = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    createMob: mutations.mobCreate,
-    updateMob: mutations.mobUpdate,
-    updateMobMaturityAttribute: mutations.mobMaturityAttributeUpdate
+    createMob: mutations.MobCreate,
+    updateMob: mutations.MobUpdate,
+    addMobMaturity: mutations.MobMaturityAdd,
+    updateMobMaturityAttribute: mutations.MobMaturityAttributeUpdate
   }
 });
 
